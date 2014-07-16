@@ -1,7 +1,15 @@
+import transaction
 from pyramid.config import Configurator
 from webassets import Bundle
 from os import path
 from webassets.filter import get_filter
+
+from pyramid.authentication import AuthTktAuthenticationPolicy
+from pyramid.authorization import ACLAuthorizationPolicy
+
+from .db_config import get_db_engine
+
+from .models.pyramid_base import DBSession, Base
 
 
 def _bundle_app_css(debug=False):
@@ -40,6 +48,11 @@ def _bundle_app_css(debug=False):
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+    engine = get_db_engine()
+    DBSession.configure(bind=engine)
+    Base.metadata.create_all(engine)
+    Base.metadata.bind = engine
+    
     config = Configurator(settings=settings)
     config.add_jinja2_extension('webassets.ext.jinja2.AssetsExtension')
     assets_env = config.get_webassets_env()
