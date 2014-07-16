@@ -49,7 +49,7 @@ at `vagrant@ubuntu-14:~$ `
 
 Run the development config of the server with auto-reload on changes:
 
-    docker run --name devweb1 -v /vagrant:/workspace --link nl_mysql:mysql -p 6543:6543 -P -d --workdir="/workspace/pyramid-dev/MyProject" johnwlockwood/myproject-web pserve development.ini --reload
+    docker run --name devweb1 -v /vagrant:/workspace --link db_mysql:mysql -p 6543:6543 -P -d --workdir="/workspace/pyramid-dev/MyProject" johnwlockwood/myproject-web pserve development.ini --reload
 
 ### Access webserver from your computer.
 
@@ -165,7 +165,7 @@ it will remain running and you can `vagrant ssh` back into it a will.
 
 Run a container interactively to initialize the volume /workspace:
 
-    vagrant@ubuntu-14:~$ docker run --rm -v /vagrant:/workspace --link nl_mysql:mysql -t -i -P --workdir="/workspace/pyramid-dev/MyProject" johnwlockwood/myproject-web /bin/bash
+    vagrant@ubuntu-14:~$ docker run --rm -v /vagrant:/workspace --link db_mysql:mysql -t -i -P --workdir="/workspace/pyramid-dev/MyProject" johnwlockwood/myproject-web /bin/bash
     root@cc77be734ced:/workspace/pyramid-dev/MyProject#
 
 #### Exit the container
