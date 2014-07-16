@@ -1,8 +1,13 @@
 #DOCKER-VERSION 0.3.4
 FROM        ubuntu:14.04
+RUN         apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 40976EAF437D05B5
 RUN         apt-get update
-RUN         apt-get -y install curl g++ make
-RUN         apt-get -y install git python-protobuf python-dev
+RUN         apt-get -y upgrade
+RUN         apt-get -y install g++
+RUN         apt-get -y install make
+RUN         apt-get -y install curl
+RUN         apt-get -y install git
+RUN         apt-get -y install python-dev
 RUN         export LD_LIBRARY_PATH=/usr/local/lib
 RUN         cd /home && curl -O https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 RUN         pip install -U six==1.7.3
