@@ -175,4 +175,8 @@ Exiting the container will bring you back to the vagrant command prompt:
     root@cc77be734ced:/workspace/pyramid-dev/MyProject# exit
     exit
     vagrant@ubuntu-14:~$
+    
+#### Connect with mysql client to db_mysql container
+
+    docker run -it --link db_mysql:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
 
